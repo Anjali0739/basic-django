@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse  # 👈 Step 1: Import built-in response class
+from .models import Task
 
 # Create your views here.
 
@@ -25,4 +26,14 @@ def contact_view(request):
             'message': message
         })
     return render(request, 'contact.html')
+
+
+
+def task_view(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        if title:
+            Task.objects.create(title=title)
+    tasks = Task.objects.all().order_by('-created')
+    return render(request, 'task.html', {'tasks': tasks})
 
