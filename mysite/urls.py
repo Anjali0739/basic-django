@@ -16,8 +16,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include       # 👈 include lets you use app-level routing
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+     path('', include('home.urls')),  # 👈 This connects pages app to the main site
 ]
