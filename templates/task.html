@@ -10,12 +10,31 @@
 </form>
 
 <hr>
-<h3>All Tasks</h3>
+
+<h3>Pending Tasks</h3>
 <ul>
-  {% for task in tasks %}
-    <li>{{ task.title }} <small class="text-muted">({{ task.created }})</small></li>
+  {% for task in tasks_pending %}
+    <li>
+      {{ task.title }}
+      <a href="{% url 'mark_done' task.id %}" class="btn btn-sm btn-success">Mark Done</a>
+      <a href="{% url 'delete_task' task.id %}" class="btn btn-sm btn-danger">Delete</a>
+    </li>
   {% empty %}
-    <li>No tasks yet!</li>
+    <li>No pending tasks.</li>
+  {% endfor %}
+</ul>
+
+<hr>
+
+<h3>Completed Tasks</h3>
+<ul>
+  {% for task in tasks_done %}
+    <li>
+      <s>{{ task.title }}</s>
+      <a href="{% url 'delete_task' task.id %}" class="btn btn-sm btn-danger">Delete</a>
+    </li>
+  {% empty %}
+    <li>No completed tasks.</li>
   {% endfor %}
 </ul>
 
