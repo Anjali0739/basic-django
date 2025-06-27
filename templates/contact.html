@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+
+<h2>Contact Form</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="name">Your Name:</label>
+    <input type="text" name="name" id="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="message">Message:</label>
+    <textarea name="message" id="message" class="form-control" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+{% if name %}
+  <hr>
+  <h4>Thanks, {{ name }}!</h4>
+  <p>You said: "{{ message }}"</p>
+{% endif %}
+
+{% endblock %}

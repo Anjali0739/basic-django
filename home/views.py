@@ -14,3 +14,15 @@ def home_view(request):
 
 def about_view(request):
     return render(request, 'about.html')
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        message = request.POST.get('message')
+        return render(request, 'contact.html', {
+            'name': name,
+            'message': message
+        })
+    return render(request, 'contact.html')
+
